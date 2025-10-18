@@ -139,49 +139,85 @@ body .drawBox .smallHearts .smallHeart:nth-child(13) {
   left: 65%;
   top: 76%;
 }
+
+/* Make page fill the screen and center content */
+body {
+  margin: 0;
+  height: 100vh;
+  background: radial-gradient(circle at center, #ffe6e6 0%, #ffb3b3 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Center and resize the main heart */
 body .mainHeart {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 90px;
 }
+
+/* Bigger, responsive heart */
 body .mainHeart svg {
-  margin-top: 0%;
-  width: 82%;
+  width: 50vw;        /* responsive size */
+  max-width: 400px;   /* max limit */
+  height: auto;
+  margin-top: 0;
+  margin-bottom: 80px; /* 👈 أضفنا هذه المسافة بين القلب والجملة */
+
 }
+
+/* Heart drawing animation */
 body .mainHeart svg .drawHeart {
   fill: none;
   stroke: #d63b3b;
   stroke-linejoin: bevel;
-  stroke-width: 3px;
+  stroke-width: 4px;  /* slightly thicker for larger size */
   stroke-dasharray: 1867.0498046875;
   stroke-dashoffset: 1867.0498046875;
-  -webkit-animation: draw 3s linear 0.5s forwards;
-          animation: draw 3s linear 0.5s forwards;
+  animation: draw 3s linear 0.5s forwards;
+  margin-bottom: 80px;
 }
-@-webkit-keyframes draw {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
+
 @keyframes draw {
   to {
     stroke-dashoffset: 0;
   }
 }
+
+/* Optional: Heartbeat pulse after drawing */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+/* Make the SVG pulse after animation */
+body .mainHeart svg {
+  animation: draw 3s linear 0.5s forwards, pulse 2s ease-in-out 3.5s infinite;
+  transform-origin: center;
+}
+
+/* Greeting text */
 body .greeting {
   font-family: "Amatic SC", cursive;
   text-align: center;
-  font-size: 45px;
+  font-size: 60px;
+  color: #b30000;
   position: absolute;
-  bottom: 5%;
+  bottom: 0.05%;
   left: 0;
   width: 100%;
-  /* remove fixed height */
-  height: auto;
-  line-height: 1.2; /* a little taller so emojis don't cut */
-  overflow: visible; /* so nothing is hidden */
+  line-height: 0.1;
+  overflow: visible;
   display: flex;
   justify-content: center;
+  margin-top: 20;
 }
 
 body .greeting .s {
